@@ -11,11 +11,18 @@ var out = "";
 //     fetch(url)
 //     .then(response =>response.json())
 //     .then(data => {
-//         console.log(data);
-//         let temp = {};
-//         temp.id = data.id;
-//         temp.result = data.left - data.right
-//         console.log(temp);
+    // temp.id = data.id;
+    // if(data.operation.includes('subtraction')){
+    //     temp.result = data.left - data.right;
+    // }else if(data.operation.includes('addition')){
+    //     temp.result = data.left + data.right;
+    // }else if(data.operation.includes('multiplication')){
+    //     temp.result = data.left * data.right;
+    // }else if(data.operation.includes('reminder')){
+    //     temp.result = data.left % data.right;
+    // }else if(data.operation.includes('division')){
+//       temp.result = data.left / data.right;
+//    }
 //         fetch(url1,{
 //             method:"POST",
 //             body:JSON.stringify(temp)
@@ -38,14 +45,23 @@ server.on('request',async(req,res) => {
 
 })
   http.createServer(function (req, res) {
-        console.log('Wait for 2 second...')
         fetch(url)
         .then(response =>response.json())
         .then(data => {
             console.log(data);
             let temp = {};
             temp.id = data.id;
-            temp.result = data.left - data.right
+            if(data.operation.includes('subtraction')){
+                temp.result = data.left - data.right;
+            }else if(data.operation.includes('addition')){
+                temp.result = data.left + data.right;
+            }else if(data.operation.includes('multiplication')){
+                temp.result = data.left * data.right;
+            }else if(data.operation.includes('reminder')){
+                temp.result = data.left % data.right;
+            }else if(data.operation.includes('division')){
+                temp.result = data.left / data.right;
+            }
             console.log(temp);
             fetch(url1,{
                 method:"POST",
@@ -62,5 +78,4 @@ server.on('request',async(req,res) => {
         })// Print error message if occur
          .catch(error => console.log(
                  'Error to fetch data\n'))
-     //res.end();
 }).listen(3000);
